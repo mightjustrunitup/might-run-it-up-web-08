@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,22 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				navy: {
+					DEFAULT: '#0A1128',
+					light: '#1C2E4A',
+					dark: '#060A18',
+				},
+				gold: {
+					DEFAULT: '#D4AF37',
+					light: '#E6C65B',
+					dark: '#B39429',
+				},
+			},
+			fontFamily: {
+				sans: ['Montserrat', 'sans-serif'],
+				serif: ['Playfair Display', 'serif'],
+				display: ['Cinzel', 'serif'],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -70,26 +86,43 @@ export default {
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' },
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
-					},
-					to: {
-						height: '0'
-					}
-				}
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' },
+				},
+				fadeIn: {
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' },
+				},
+				slideInRight: {
+					'0%': { opacity: '0', transform: 'translateX(100px)' },
+					'100%': { opacity: '1', transform: 'translateX(0)' },
+				},
+				slideInLeft: {
+					'0%': { opacity: '0', transform: 'translateX(-100px)' },
+					'100%': { opacity: '1', transform: 'translateX(0)' },
+				},
+				scaleIn: {
+					'0%': { opacity: '0', transform: 'scale(0.95)' },
+					'100%': { opacity: '1', transform: 'scale(1)' },
+				},
+				float: {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fadeIn 0.7s ease-out forwards',
+				'slide-in-right': 'slideInRight 0.7s ease-out forwards',
+				'slide-in-left': 'slideInLeft 0.7s ease-out forwards',
+				'scale-in': 'scaleIn 0.5s ease-out forwards',
+				'float': 'float 5s ease-in-out infinite',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
