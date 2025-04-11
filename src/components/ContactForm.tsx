@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Send, Loader2 } from "lucide-react";
+import { createClient } from '@supabase/supabase-js';
 
 const ContactForm = () => {
   const { toast } = useToast();
@@ -22,13 +23,40 @@ const ContactForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      setIsLoading(false);
+    try {
+      // Get Supabase URL and anon key from environment variables
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      
+      if (!supabaseUrl || !supabaseAnonKey) {
+        throw new Error('Supabase credentials not found');
+      }
+
+      // Create Supabase client
+      const supabase = createClient(supabaseUrl, supabaseAnonKey);
+      
+      // Insert data into the contacts table
+      const { data, error } = await supabase
+        .from('contacts')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone || null,
+            subject: formData.subject,
+            message: formData.message,
+            created_at: new Date().toISOString(),
+          }
+        ]);
+
+      if (error) {
+        throw error;
+      }
+      
       toast({
         title: "Message Sent",
         description: "Thank you for contacting us. We'll respond shortly.",
@@ -43,7 +71,17 @@ const ContactForm = () => {
         subject: "",
         message: "",
       });
-    }, 1500);
+
+    } catch (error) {
+      console.error("Error saving contact:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
