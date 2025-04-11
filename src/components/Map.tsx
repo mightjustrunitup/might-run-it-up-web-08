@@ -9,17 +9,24 @@ interface MapProps {
 const Map: React.FC<MapProps> = ({ className }) => {
   return (
     <div className={`relative h-full w-full ${className}`}>
-      <div className="w-full h-full min-h-[400px] rounded-lg overflow-hidden">
-        <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6174433845846!2d-73.9877407!3d40.750378!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5m2!1sen!2sus"
-          width="100%" 
-          height="100%" 
-          style={{ border: 0, minHeight: "400px", borderRadius: "8px" }}
-          allowFullScreen 
-          loading="lazy" 
-          referrerPolicy="no-referrer-when-downgrade"
-          title="MightJustRunItUp Headquarters"
-        ></iframe>
+      <div className="w-full h-full min-h-[400px] rounded-lg overflow-hidden bg-gray-100 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 bg-navy bg-opacity-5 z-10"></div>
+        <div className="relative z-20 flex flex-col items-center">
+          <MapPin size={48} className="text-navy mb-4" />
+          <h3 className="text-xl font-semibold text-navy mb-2">MightJustRunItUp Headquarters</h3>
+          <p className="text-gray-600 text-center">
+            123 Luxury Avenue, Suite 1500<br />
+            New York, NY 10001
+          </p>
+        </div>
+        
+        {/* Background pattern for visual interest */}
+        <div className="absolute inset-0 opacity-10 z-0">
+          <div className="w-full h-full" style={{
+            backgroundImage: `radial-gradient(circle, #0A1128 1px, transparent 1px)`,
+            backgroundSize: '20px 20px'
+          }}></div>
+        </div>
       </div>
     </div>
   );
