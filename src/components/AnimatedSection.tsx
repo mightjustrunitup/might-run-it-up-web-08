@@ -9,6 +9,7 @@ interface AnimatedSectionProps {
   delay?: number;
   className?: string;
   threshold?: number;
+  onClick?: () => void; // Add onClick handler to the props interface
 }
 
 const AnimatedSection = ({
@@ -17,6 +18,7 @@ const AnimatedSection = ({
   delay = 0,
   className = "",
   threshold = 0.2,
+  onClick, // Add onClick to the component props
 }: AnimatedSectionProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -67,7 +69,11 @@ const AnimatedSection = ({
   };
 
   return (
-    <div ref={sectionRef} className={`${getAnimationClass()} ${className}`}>
+    <div 
+      ref={sectionRef} 
+      className={`${getAnimationClass()} ${className}`}
+      onClick={onClick} // Add the onClick handler to the div
+    >
       {children}
     </div>
   );
