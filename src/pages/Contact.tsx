@@ -1,7 +1,7 @@
-
 import React from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactForm from "@/components/ContactForm";
+import Map from "@/components/Map";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 const Contact = () => {
@@ -89,16 +89,7 @@ const Contact = () => {
             <AnimatedSection direction="left" delay={200}>
               <div className="h-full">
                 <div className="bg-white p-4 rounded-lg shadow-lg h-full">
-                  <div className="bg-gray-200 rounded-lg h-full min-h-[400px] overflow-hidden">
-                    {/* This would be replaced with an actual map component */}
-                    <div className="w-full h-full flex items-center justify-center bg-navy/10">
-                      <div className="text-center p-8">
-                        <MapPin size={48} className="text-navy mx-auto mb-4" />
-                        <h3 className="text-lg font-medium">MightJustRunItUp Headquarters</h3>
-                        <p className="text-gray-600">123 Luxury Avenue, New York, NY</p>
-                      </div>
-                    </div>
-                  </div>
+                  <Map className="min-h-[400px] rounded-lg" />
                 </div>
               </div>
             </AnimatedSection>
